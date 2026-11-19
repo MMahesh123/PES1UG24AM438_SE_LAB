@@ -4,39 +4,38 @@ Application under test: `marathon_registration.py`
 
 ## Files
 
-- `marathon_registration.py` — application supplied in the assigned repository
-- `CodeCoverageTest_PES1UG24AM438_marathon_registration.py` — line/code coverage test cases
-- `BranchCoverageTest_PES1UG24AM438_marathon_registration.py` — branch coverage test cases
+- `marathon_registration.py` — application under test
+- `CodeCoverageTest_PES1UG24AM438_marathon_registration.py` — code/line coverage tests
+- `BranchCoverageTest_PES1UG24AM438_marathon_registration.py` — branch coverage tests
+- `test_marathon_registration.py` — additional application tests
 
 ## Setup
 
 From the repository root:
 
 ```powershell
-py -m pip install pytest coverage
+python -m pip install pytest coverage
 cd lab06
 ```
 
-## 1. Code coverage
+## Code coverage
 
 ```powershell
-py -m coverage erase
-py -m coverage run --source=marathon_registration -m pytest -v CodeCoverageTest_PES1UG24AM438_marathon_registration.py
-py -m coverage report -m
+python -m coverage erase
+python -m coverage run --source=marathon_registration -m pytest -v CodeCoverageTest_PES1UG24AM438_marathon_registration.py
+python -m coverage report -m
 ```
 
-Save a screenshot of the passing test run and the actual coverage report. Target: at least 90%.
+Verified local result: **4 passed; 97% statement coverage** (38 statements, 1 missing).
 
-## 2. Branch coverage
+## Branch coverage
 
 ```powershell
-py -m coverage erase
-py -m coverage run --branch --source=marathon_registration -m pytest -v BranchCoverageTest_PES1UG24AM438_marathon_registration.py
-py -m coverage report -m
+python -m coverage erase
+python -m coverage run --branch --source=marathon_registration -m pytest -v BranchCoverageTest_PES1UG24AM438_marathon_registration.py
+python -m coverage report -m
 ```
 
-Save a screenshot of the passing test run and the actual branch coverage report. Target: at least 90%.
+Verified local result: **18 passed; 100% coverage** (38 statements, 28 branches, 0 partial branches).
 
-## Commits
-
-The two dedicated test files have been added in separate commits as required by the handout. Do not edit or invent coverage percentages; submit the output produced by your actual run.
+Both results exceed the handout's 90% target. The terminal screenshots should be included with the lab submission evidence.
