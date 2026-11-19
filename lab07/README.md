@@ -21,7 +21,13 @@ Capture the four screenshots from real terminal runs in this order.
 
 ### SS1 — Run the original application
 
-For valid sample inputs, run the original application using valid sample inputs. If needed, execute the original file directly after renaming/copying it to the expected application name.
+Run the preserved original buggy application directly:
+
+```powershell
+py marathon_registration_parser_original.py
+```
+
+Use valid sample inputs: `Mahesh Kumar`, `3:45:10`, and `25 26 24`. Capture the output.
 
 ### SS2 — Show Hypothesis finding failures
 
@@ -46,7 +52,7 @@ Remove-Item -Recurse -Force __pycache__ -ErrorAction SilentlyContinue
 py marathon_registration_parser.py
 ```
 
-Use sample inputs such as `Mahesh Kumar`, `3:45:10`, and `25 26 24`. Capture the output.
+Use the same sample inputs and capture the output.
 
 ### SS4 — Show all tests passing
 
@@ -66,4 +72,4 @@ Capture the passing output.
 
 Create `PES1UG24AM438_MAHESH_LAB7.pdf` containing SS1–SS4 and the reflection answers requested by your instructor/handout. Also submit the fixed application and Hypothesis test file.
 
-Do not claim a test passed or failed until the corresponding command has actually been run.
+After SS3/SS4, remove the temporary `marathon_registration_parser_fixed_backup.py` file if it is present. Do not commit the backup. Do not claim a test passed or failed until the corresponding command has actually been run.
