@@ -11,56 +11,56 @@ Original buggy implementation preserved as: `marathon_registration_parser_origin
 From the repository root:
 
 ```powershell
-py -m pip install hypothesis pytest
+python -m pip install hypothesis pytest
 cd lab07
 ```
 
 ## Screenshot sequence
 
-Capture the four screenshots from real terminal runs in this order.
+### SS1 — Original application
 
-### SS1 — Run the original application
-
-Run the preserved original buggy application directly:
+Run:
 
 ```powershell
-py marathon_registration_parser_original.py
+python marathon_registration_parser_original.py
 ```
 
-Use valid sample inputs: `Mahesh Kumar`, `3:45:10`, and `25 26 24`. Capture the output.
+Sample inputs: `Mahesh Kumar`, `3:45:10`, and `25 26 24`.
 
-### SS2 — Show Hypothesis finding failures
+Observed output: bib name `M MAHESH`, finish time `13510` seconds, average split `25.0` minutes.
 
-The test module imports `marathon_registration_parser`. Temporarily swap the original implementation into that filename:
+### SS2 — Hypothesis failures on original implementation
+
+The test module imports `marathon_registration_parser`. Temporarily swap in the original implementation:
 
 ```powershell
 Copy-Item marathon_registration_parser.py marathon_registration_parser_fixed_backup.py
 Copy-Item marathon_registration_parser_original.py marathon_registration_parser.py -Force
 Remove-Item -Recurse -Force __pycache__ -ErrorAction SilentlyContinue
-py -m pytest test_marathon_registration_parser.py -v
+python -m pytest test_marathon_registration_parser.py -v
 ```
 
-Capture the failing Hypothesis output. These failures are expected against the original implementation.
+Verified result: **3 failed, 3 passed**. Hypothesis exposed unexpected-input failures in all three functions: `format_bib_name`, `parse_finish_time`, and `average_split`.
 
-### SS3 — Run the fixed application
+### SS3 — Fixed application
 
 Restore the fixed implementation:
 
 ```powershell
 Copy-Item marathon_registration_parser_fixed_backup.py marathon_registration_parser.py -Force
 Remove-Item -Recurse -Force __pycache__ -ErrorAction SilentlyContinue
-py marathon_registration_parser.py
+python marathon_registration_parser.py
 ```
 
-Use the same sample inputs and capture the output.
+Using the same sample inputs, the fixed application produces the expected valid-input output.
 
-### SS4 — Show all tests passing
+### SS4 — Passing tests
 
 ```powershell
-py -m pytest test_marathon_registration_parser.py -v
+python -m pytest test_marathon_registration_parser.py -v
 ```
 
-Capture the passing output.
+Verified result: **6 passed**.
 
 ## Fixed input behaviour
 
@@ -68,8 +68,6 @@ Capture the passing output.
 - `parse_finish_time`: convert valid H:MM:SS to seconds; invalid values return `None`.
 - `average_split`: average non-negative integer split values; invalid or empty input returns `None`.
 
-## PDF submission
+## Submission
 
-Create `PES1UG24AM438_MAHESH_LAB7.pdf` containing SS1–SS4 and the reflection answers requested by your instructor/handout. Also submit the fixed application and Hypothesis test file.
-
-After SS3/SS4, remove the temporary `marathon_registration_parser_fixed_backup.py` file if it is present. Do not commit the backup. Do not claim a test passed or failed until the corresponding command has actually been run.
+The Lab 7 handout requests a PDF containing the four screenshots, plus the fixed application and updated test file. The fixed application, original implementation, and Hypothesis tests are included in this folder. Remove the temporary `marathon_registration_parser_fixed_backup.py` after testing; do not commit it.
